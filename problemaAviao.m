@@ -14,20 +14,14 @@ while sair == 0
     opcao = input('--> ', 's');
 
     switch opcao
-        case 'A'
-            strFuncao = '-0.02 * y^2 - 0.9';
-            funcao = str2func(['@(t,y)', strFuncao]);
-            pontoInicial = [0 (300 * 10^3 / 3600)];
-            extremoDireito = 20;
-            
-            solveAviao(strFuncao, funcao, pontoInicial, extremoDireito);
+        case 'A'         
+            solveAviao('-0.02 * y^2 - 0.9', [0 (300 / 3.6)], 20, 50, 'C');
         case 'B'
             fprintf('\nDefina os parâmetros a e b da equação do sistema de travagem, que tem a forma\n');
             fprintf('F(t,y) = -a*y^2 - b, com a>0 e b>0.\n');
             a = input('a = ');
             b = input('b = ');
             strFuncao = sprintf('-%d * y^2 - %d', a, b);
-            funcao = str2func(['@(t,y)', strFuncao]);
 
             fprintf('\nDefina o instante de tempo inicial (s) e a velocidade inicial (km/h), respetivamente a abcissa e ordenada do ponto inicial.\n');
             pontoInicial = getPontoInicial('');
@@ -37,7 +31,10 @@ while sair == 0
             fprintf('Sugestão: Intervalos de tempo muito grandes dão origem a erros de aproximação.\n');
             extremoDireito = getExtremoDireito(pontoInicial(1));
             
-            solveAviao(strFuncao, funcao, pontoInicial, extremoDireito);
+            metodo = getMetodo();
+            numIntervalos = getNumIntervalos('');
+            
+            solveAviao(strFuncao, pontoInicial, extremoDireito, numIntervalos, metodo);
         case 'S'
             sair = 1;
         otherwise
@@ -46,10 +43,9 @@ while sair == 0
 end
 end
 
-function solveAviao(strFuncao, funcao, pontoInicial, extremoDireito)
-    metodo = getMetodo;
-    numIntervalos = 50;
-
+function solveAviao(strFuncao, pontoInicial, extremoDireito, numIntervalos, metodo)
+    funcao = str2func(['@(t,y)', strFuncao]);
+    
     %calcula a solução através de um dos métodos
     [x, y] = calculaSolucaoNum(funcao, pontoInicial, extremoDireito, numIntervalos, metodo);
 
@@ -69,9 +65,9 @@ function solveAviao(strFuncao, funcao, pontoInicial, extremoDireito)
 
         %caso a função não tenha um zero no intervalo considerado
         if i == numIntervalos
-            fprintf('O avião não se imobiliza no intervalo considerado.\n'); 
             plot(x, y);
             alteraGraf(metodo, strFuncao, 'A');
+            fprintf('O avião não se imobiliza no intervalo considerado.\n'); 
         end  
     end
     input('Clique em alguma tecla para continuar --> ','s');

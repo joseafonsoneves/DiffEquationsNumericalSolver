@@ -40,6 +40,10 @@ while cond == 1
             
             [h, erros1] = calculaErro(strFuncao, pontoInicial, extremoDireito, ...
                                       metodo, numIntervalos, numPassos);
+            p = polyfit(log(h), log(erros1), 1);
+            e = p(1);
+            k = exp(p(2));
+            fprintf('Regressão linear: Erro = %f * h^%f.\n', k, e);
             
             loglog(h, erros1);
             alteraGraf(metodo, strFuncao, 'E');
