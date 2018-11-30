@@ -7,8 +7,10 @@
 
 % Mensagem de boas-vindas
 fprintf(2,'\n**** Bem-vindo ao programa EquationSolver! ****\n');
-fprintf(' Este programa permite a resolução de equações diferenciais de primeira ordem\n');
-fprintf('utilizando os métodos de Euler progressivo e Runge-Kutta de 2ª, 3ª e 4ª ordens!\n');
+fprintf('Este programa permite a resolução de equações diferenciais\n');
+fprintf(' de primeira ordem utilizando os métodos de Euler \n');
+fprintf('progressivo e Runge-Kutta de 2ª, 3ª e 4ª ordens!\n');
+
 % Menu inicial
 a = 0;
 while a == 0

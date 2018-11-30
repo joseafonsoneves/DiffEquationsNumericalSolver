@@ -7,14 +7,13 @@ function [x, y] = calculaSolucaoNum(funcao, pontoInicial, extremoDireito, ...
 % Inicialização dos dados de saída
 x = zeros(numIntervalos + 1, 1);
 y = zeros(numIntervalos + 1, 1);
-
-% Calcula passo através do extremo direito do intervalo, do ponto inicial e
-% do número de pontos indicado
-h = (extremoDireito - pontoInicial(1)) / numIntervalos;
-
 % Preenche nos vetores das coordenadas as do ponto inicial
 x(1) = pontoInicial(1);
 y(1) = pontoInicial(2);
+
+% Calcula passo através do extremo direito do intervalo, do ponto inicial
+% e do número de pontos indicado
+h = (extremoDireito - pontoInicial(1)) / numIntervalos;
 
 % Itera sobre o intervalo desde o segundo ponto inclusive ao ponto final
 for i = 2 : numIntervalos + 1

@@ -12,7 +12,8 @@ while a == 0
     fprintf('-------------------------------------------\n');
     metodo = input('--> ','s');
     
-    if ~strcmp(metodo,'A') && ~strcmp(metodo,'B') && ~strcmp(metodo,'C') && ~strcmp(metodo,'D')
+    if ~strcmp(metodo,'A') && ~strcmp(metodo,'B') && ...
+       ~strcmp(metodo,'C') && ~strcmp(metodo,'D')
         fprintf(2, 'Opção Inválida!\n');
     else
         a = 1;

@@ -4,9 +4,9 @@ c=0;
 while c == 0
     a = str2double(input('Insira a abcissa do ponto inicial: ', 's'));
     if isnan(a)
-        fprintf(2, 'Insira um valor numérico inferior ao Limite Direito\n');
+        fprintf(2, 'Insira um valor numérico\n');
     elseif isempty(extremoDireito)
-        c=1;
+        c = 1;
     elseif a >= extremoDireito
         fprintf(2,'Insira um valor menor que o extremo Direito\n');
     else

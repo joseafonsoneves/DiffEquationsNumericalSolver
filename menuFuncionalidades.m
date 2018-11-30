@@ -1,6 +1,5 @@
 function menuFuncionalidades (strFuncao, pontoInicial, extremoDireito)
 % Permite escolher o modo de utilização do programa 
-
 funcao = str2func(['@(t,y)', strFuncao]);
 
 cond = 1;
@@ -25,29 +24,34 @@ while cond == 1
             metodo = getMetodo;
             
             yAnali = calculaSolucaoAnali(pontoInicial,strFuncao);
-            [xNum, yNum] = calculaSolucaoNum(funcao, pontoInicial, extremoDireito, numIntervalos, metodo);
+            [xNum, yNum] = calculaSolucaoNum(funcao, pontoInicial, ...
+                                             extremoDireito, ...
+                                             numIntervalos, metodo);
             erro = abs(yAnali(extremoDireito) - yNum(length(yNum)));
-            
+                  
             fprintf('A aproximação tem um erro absoluto de %f.\n', erro);
             plot(xNum, yNum, '-r+', xNum, yAnali(xNum), 'g');
             alteraGraf(metodo, strFuncao, 'R');
-            input('\nClique qualquer botão para voltar ao menu Funcionalidades -->','s');
+            fprintf('\nClique qualquer botão para voltar ao menu ');
+            input('Funcionalidades -->','s');
             close;
         case 'B'
             numIntervalos = getNumIntervalos('B');
             numPassos = getNumPassos;
             metodo = getMetodo;
             
-            [h, erros1] = calculaErro(strFuncao, pontoInicial, extremoDireito, ...
-                                      metodo, numIntervalos, numPassos);
-            p = polyfit(log(h), log(erros1), 1);
+            [h, erros] = calculaErro(strFuncao, pontoInicial, ...
+                                     extremoDireito, metodo, ...
+                                     numIntervalos, numPassos);
+            p = polyfit(log(h), log(erros), 1);
             e = p(1);
             k = exp(p(2));
             fprintf('Regressão linear: Erro = %f * h^%f.\n', k, e);
             
-            loglog(h, erros1);
+            loglog(h, erros);
             alteraGraf(metodo, strFuncao, 'E');
-            input('\nClique qualquer botão para voltar ao menu Funcionalidades -->','s');
+            fprintf('\nClique qualquer botão para voltar ao menu ');
+            input('Funcionalidades -->','s');
             close;
         case 'C'
             pontoInicial = getPontoInicial(extremoDireito);
@@ -59,6 +63,6 @@ while cond == 1
         case 'S'
             cond = 0;
         otherwise
-            fprintf(2, "Opção inválida");
+            fprintf(2, 'Opção inválida\n');
     end
 end

@@ -4,10 +4,11 @@ function alteraGraf(metodo, strFuncao, grafico)
 switch grafico
     % Se for um gráfico de erro
     case 'E'
-        xlabel('Log(Passo) (h)');
-        ylabel('Log(Erro Absoluto)');
-        title(['Representação do erro absoluto da função f(t,y)=',strFuncao]);
-        % Se for um gráfico de resolução
+        xlabel('Passo (h)');
+        ylabel('Erro Absoluto Global');
+        title(['Representação do erro absoluto global ', ...
+              'de f(t,y)=', strFuncao]);
+    % Se for um gráfico de resolução
     case 'R'
         xlabel('t');
         ylabel('y');
@@ -16,11 +17,14 @@ switch grafico
             case 'A'
                 legend('Método de Euler Progressivo','Solução exata');
             case 'B'
-                legend('Método de Runge-Kutta de 2ª ordem','Solução exata');
+                legend('Método de Runge-Kutta de 2ª ordem', ...
+                       'Solução exata');
             case 'C'
-                legend('Método de Runge-Kutta de 3ª ordem','Solução exata');
+                legend('Método de Runge-Kutta de 3ª ordem', ...
+                       'Solução exata');
             case 'D'
-                legend('Método de Runge-Kutta de 4ª ordem','Solução exata');
+                legend('Método de Runge-Kutta de 4ª ordem', ...
+                       'Solução exata');
         end
     case 'A'
         xlabel('Instante (s)');
@@ -38,6 +42,4 @@ if grafico ~= 'R'
         case 'D'
             legend('Método de Runge-Kutta de 4ª ordem');
     end
-end
-    
 end

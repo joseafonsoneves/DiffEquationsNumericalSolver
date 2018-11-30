@@ -1,5 +1,6 @@
-function [h, erros] = calculaErro(strFuncao, pontoInicial, extremoDireito, ...
-                                  metodo, numIntervalosInicial, numeroPassos)
+function [h, erros] = calculaErro(strFuncao, pontoInicial, ...
+                                  extremoDireito, metodo, ...
+                                  numIntervalosInicial, numeroPassos)
 % Esta função apresenta o erro absoluto entre a solução analítica e a
 % solução aproximada de um dos métodos
 
@@ -16,8 +17,9 @@ for i = 1 : numeroPassos
     % Calcula o número de intervalos correspondente ao passo atual
     numeroIntervalos = (extremoDireito - pontoInicial(1)) / h(i);
     % Calcula o erro e guarda-o
-    [~, yNum] = calculaSolucaoNum(funcao, pontoInicial, extremoDireito, ...
-                                  numeroIntervalos, metodo);
+    [~, yNum] = calculaSolucaoNum(funcao, pontoInicial, ...
+                                  extremoDireito, numeroIntervalos, ...
+                                  metodo);
     ySolAnali = calculaSolucaoAnali(pontoInicial, strFuncao);
     erros(i) = abs(yNum(length(yNum)) - ySolAnali(extremoDireito));
 end
